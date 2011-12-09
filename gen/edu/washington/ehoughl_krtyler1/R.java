@@ -12,18 +12,14 @@ public final class R {
     }
     public static final class drawable {
         public static final int icon=0x7f020000;
-        public static final int top_bottom_border_darkgray=0x7f020001;
     }
     public static final class id {
-        public static final int gridLayout1=0x7f050000;
-        public static final int linearLayout1=0x7f050002;
-        public static final int textView1=0x7f050001;
+        public static final int textViewAlarmTitle=0x7f050000;
     }
     public static final class layout {
         public static final int main=0x7f030000;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int hello=0x7f040000;
+        public static final int app_name=0x7f040000;
     }
 }
