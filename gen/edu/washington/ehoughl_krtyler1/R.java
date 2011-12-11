@@ -17,8 +17,7 @@ public final class R {
         public static final int mediumgray=0x7f040001;
     }
     public static final class drawable {
-        public static final int buttonselected=0x7f020000;
-        public static final int icon=0x7f020001;
+        public static final int icon=0x7f020000;
     }
     public static final class id {
         public static final int buttonCancel=0x7f060017;
