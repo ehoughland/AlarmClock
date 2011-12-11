@@ -202,26 +202,6 @@
 	        android:layout_below="@+id/spinner1"
 	        android:layout_marginRight="4dp" />
 
-	    <CheckBox
-	        android:id="@+id/checkBox1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentBottom="true"
-	        android:layout_alignRight="@+id/seekBar1"
-	        android:layout_marginBottom="11dp"
-	        android:text="Vibrate"
-	        android:textColor="#666666" />
-
-	    <CheckBox
-	        android:id="@+id/checkBox2"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignLeft="@+id/relativeLayout1"
-	        android:layout_alignParentBottom="true"
-	        android:layout_marginBottom="11dp"
-	        android:text="Slowly raise volume"
-	        android:textColor="#666666" />
-
 	    <TextView
 	        android:id="@+id/textView1"
 	        android:layout_width="wrap_content"
@@ -250,5 +230,28 @@
 	        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 	</RelativeLayout>
+
+	<View android:layout_width="match_parent" android:layout_height="2dip" android:background="#4d4d4d" />
 	    
+	<LinearLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal"
+	    android:layout_width="match_parent" android:layout_height="54dp" 
+	    android:background="#cccccc" >
+	    
+	    <Button
+	        android:id="@+id/buttonSave" android:layout_marginTop="5dp"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1" 
+	        android:text="Save" />
+
+	    <Button
+	        android:id="@+id/buttonCancel" android:layout_marginTop="5dp"
+	        android:layout_width="0dp"
+	        android:layout_weight="1" 
+	        android:layout_height="wrap_content"
+	        android:text="Cancel" />
+	
+	</LinearLayout>
+	  	    
 </LinearLayout>
