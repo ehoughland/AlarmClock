@@ -10,6 +10,12 @@ package edu.washington.ehoughl_krtyler1;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int darkestgray=0x7f040003;
+        public static final int darkgray=0x7f040002;
+        public static final int lightgray=0x7f040000;
+        public static final int mediumgray=0x7f040001;
+    }
     public static final class drawable {
         public static final int icon=0x7f020000;
     }
