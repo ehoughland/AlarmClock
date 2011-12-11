@@ -1,49 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:background="#cccccc" >
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" >
+	
+	<TextView android:id="@+id/textViewAlarmTitle" android:layout_width="match_parent"
+		android:layout_height="40dip" android:gravity="center_vertical|center_horizontal"
+	    android:text="Alarm Name" android:textAppearance="?android:attr/textAppearanceMedium"
+	    android:textColor="#b2b2b2" android:background="#cccccc" android:typeface="normal" />
+	    
+	<View android:layout_width="match_parent" android:layout_height="2dip" android:background="#4d4d4d" />
+    
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="match_parent" android:layout_height="wrap_content"
+    	android:paddingBottom="10dp"
+    	android:background="#e6e6e6">
+	    
+		<TimePicker
+		    android:id="@+id/timePicker1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentTop="true"
+		    android:layout_centerHorizontal="true"
+		    android:layout_marginTop="13dp"
+		    android:layout_marginBottom="13dp"
+		    />
+		
+		<View
+	        android:layout_width="match_parent"
+	        android:layout_height="2dip"
+	        android:layout_below="@+id/timePicker1"
+	        android:background="#4d4d4d" />
+		
+		<TextView
+		    android:id="@+id/textViewSuggestion"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/timePicker1"
+		    android:background="#e6e6e6"
+		    android:gravity="center_horizontal"
+		    android:text="Suggested bedtimes:"
+		    android:typeface="normal"
+		    android:textSize="20dp"
+		    android:layout_marginTop="5dp"
+		    android:layout_marginBottom="1dp"
+		    android:textColor="#666666" />
+		
+		<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:id="@+id/rel1"
+    		android:layout_width="match_parent" android:layout_height="wrap_content"
+    		android:layout_below="@+id/textViewSuggestion"
+    		android:gravity="center_horizontal"
+    		android:background="#e6e6e6">
+    	
+			<TextView android:id="@+id/textViewBedTime1"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+			    android:text="10:30" android:typeface="normal" android:textStyle="bold" 
+			    android:textSize="20dp"
+			    android:textColor="#666666" android:background="#e6e6e6" />
+	
+			<TextView
+			    android:id="@+id/textViewBedTime1AMPM"
+			    android:layout_width="wrap_content" android:layout_height="wrap_content"
+			    android:layout_toRightOf="@+id/textViewBedTime1"
+			    android:layout_alignBaseline="@+id/textViewBedTime1"
+			    android:background="#e6e6e6" android:text="PM" android:paddingLeft="3dp"
+			    android:textColor="#666666" android:textSize="16dp" android:typeface="normal" />
+			
+			<TextView android:id="@+id/textViewBedTime2"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:paddingLeft="18dp"
+				android:layout_toRightOf="@+id/textViewBedTime1AMPM"
+			    android:text="12:00" android:typeface="normal" android:textStyle="bold" 
+			    android:textSize="20dp"
+			    android:textColor="#666666" android:background="#e6e6e6" />
+	
+			<TextView
+			    android:id="@+id/textViewBedTime2AMPM"
+			    android:layout_width="wrap_content" android:layout_height="wrap_content"
+			    android:layout_toRightOf="@+id/textViewBedTime2"
+			    android:background="#e6e6e6" android:text="AM" android:paddingLeft="3dp"
+			    android:layout_alignBaseline="@+id/textViewBedTime2"
+			    android:textColor="#666666" android:textSize="16dp" android:typeface="normal" />
+			
+			<TextView android:id="@+id/textViewBedTime3"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:layout_toRightOf="@+id/textViewBedTime2AMPM"
+			    android:paddingLeft="18dp"
+			    android:text="1:30" android:typeface="normal" android:textStyle="bold" 
+			    android:textSize="20dp"
+			    android:textColor="#666666" android:background="#e6e6e6" />
+	
+			<TextView
+			    android:id="@+id/textViewBedTime3AMPM"
+			    android:layout_width="wrap_content" android:layout_height="wrap_content"
+			    android:layout_toRightOf="@+id/textViewBedTime3"
+			    android:layout_alignBaseline="@+id/textViewBedTime3"
+			    android:background="#e6e6e6" android:text="AM" android:paddingLeft="3dp"
+			    android:textColor="#666666" android:textSize="16dp" android:typeface="normal" />
+			
+		</RelativeLayout>
 
-    <GridLayout
-        android:id="@+id/gridLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnCount="1" >
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/rel1"
+	        android:layout_centerHorizontal="true"
+	        android:background="#e6e6e6"
+	        android:layout_marginTop="5dp"
+	        android:text="Keep in mind: the average human takes about 14 minutes to fall asleep. "
+	        android:textColor="#666666"
+	        android:textSize="9dp"
+	        android:typeface="normal" />
+		    	    
+    </RelativeLayout>
+    
+	<View android:layout_width="match_parent" android:layout_height="2dip" android:background="#4d4d4d" />
+    
+	<RelativeLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dip"
+	    android:layout_weight="1"
+	    android:background="#cccccc" >
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_column="0"
-            android:layout_gravity="center_horizontal"
-            android:layout_row="1"
-            android:text="Name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#b2b2b2" />
+	    <RelativeLayout
+	        xmlns:android="http://schemas.android.com/apk/res/android"
+	        android:id="@+id/relativeLayout1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="42dp"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerInParent="true"
+	        android:layout_marginTop="12dp"
+	        android:background="#cccccc"
+	        android:gravity="center_vertical|center_horizontal" >
 
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="281dp"
-            android:layout_column="0"
-            android:layout_row="3"
-            android:background="@drawable/top_bottom_border_darkgray"
-            android:orientation="vertical" >  
+	        <Button
+	            android:id="@+id/buttonSunday"
+	            android:layout_width="42dp"
+	            android:layout_height="42dp"
+	            android:text="S" />
 
-        </LinearLayout>
+	        <Button
+	            android:id="@+id/buttonMonday"
+	            android:layout_width="42dp"
+	            android:layout_height="42dp"
+	            android:layout_toRightOf="@+id/buttonSunday"
+	            android:text="M" />
 
-        <Space
-            android:layout_width="1dp"
-            android:layout_height="21dp"
-            android:layout_column="0"
-            android:layout_gravity="fill_horizontal"
-            android:layout_row="0" />
+	        <Button
+	            android:id="@+id/buttonTuesday"
+	            android:layout_width="42dp"
+	            android:layout_height="42dp"
+	            android:layout_toRightOf="@+id/buttonMonday"
+	            android:text="T" />
 
-        <Space
-            android:layout_width="1dp"
-            android:layout_height="10dp"
-            android:layout_column="0"
-            android:layout_gravity="fill_horizontal"
-            android:layout_row="2" />
-    </GridLayout>
+	        <Button
+	            android:id="@+id/buttonWednesday"
+	            android:layout_width="42dp"
+	            android:layout_height="42dp"
+	            android:layout_toRightOf="@+id/buttonTuesday"
+	            android:text="W" />
 
+	        <Button
+	            android:id="@+id/buttonThursday"
+	            android:layout_width="42dp"
+	            android:layout_height="42dp"
+	            android:layout_toRightOf="@+id/buttonWednesday"
+	            android:text="T" />
+
+	        <Button
+	            android:id="@+id/buttonFriday"
+	            android:layout_width="42dp"
+	            android:layout_height="42dp"
+	            android:layout_toRightOf="@+id/buttonThursday"
+	            android:text="F" />
+
+	        <Button
+	            android:id="@+id/buttonSaturday"
+	            android:layout_width="42dp"
+	            android:layout_height="42dp"
+	            android:layout_toRightOf="@+id/buttonFriday"
+	            android:text="S" />
+	    </RelativeLayout>
+
+	    <Spinner
+	        android:id="@+id/spinner1"
+	        android:layout_width="200dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignRight="@+id/relativeLayout1"
+	        android:layout_below="@+id/relativeLayout1"
+	        android:layout_marginTop="8dp"
+	        android:layout_toRightOf="@+id/textView1" />
+
+	    <SeekBar
+	        android:id="@+id/seekBar1"
+	        android:layout_marginTop="7dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/textView2"
+	        android:layout_alignRight="@+id/spinner1"
+	        android:layout_below="@+id/spinner1"
+	        android:layout_marginRight="4dp" />
+
+	    <CheckBox
+	        android:id="@+id/checkBox1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_alignRight="@+id/seekBar1"
+	        android:layout_marginBottom="11dp"
+	        android:text="Vibrate"
+	        android:textColor="#666666" />
+
+	    <CheckBox
+	        android:id="@+id/checkBox2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/relativeLayout1"
+	        android:layout_alignParentBottom="true"
+	        android:layout_marginBottom="11dp"
+	        android:text="Slowly raise volume"
+	        android:textColor="#666666" />
+
+	    <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/spinner1"
+	        android:layout_alignBottom="@+id/spinner1"
+	        android:layout_alignLeft="@+id/relativeLayout1"
+	        android:layout_marginBottom="17dp"
+	        android:text="Sound:"
+	        android:layout_marginLeft="4dp"
+	        android:layout_marginRight="7dp"
+	        android:textColor="#666666"
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	    <TextView
+	        android:id="@+id/textView2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="#666666"
+	        android:layout_alignBottom="@+id/seekBar1"
+	        android:layout_alignBaseline="@+id/seekBar1"
+	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_marginBottom="6dp"
+	        android:layout_marginRight="9dp"
+	        android:text="Volume:"
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	</RelativeLayout>
+	    
 </LinearLayout>
