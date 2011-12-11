@@ -16,7 +16,7 @@
     	android:background="#e6e6e6">
 	    
 		<TimePicker
-		    android:id="@+id/timePicker1"
+		    android:id="@+id/timePickerAlarm"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentTop="true"
@@ -28,14 +28,14 @@
 		<View
 	        android:layout_width="match_parent"
 	        android:layout_height="2dip"
-	        android:layout_below="@+id/timePicker1"
+	        android:layout_below="@+id/timePickerAlarm"
 	        android:background="#4d4d4d" />
 		
 		<TextView
 		    android:id="@+id/textViewSuggestion"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:layout_below="@+id/timePicker1"
+		    android:layout_below="@+id/timePickerAlarm"
 		    android:background="#e6e6e6"
 		    android:gravity="center_horizontal"
 		    android:text="Suggested bedtimes:"
@@ -138,7 +138,8 @@
 	            android:id="@+id/buttonSunday"
 	            android:layout_width="42dp"
 	            android:layout_height="42dp"
-	            android:text="S" />
+	            android:text="S"
+	            android:onClick="onClickSunday" />
 
 	        <Button
 	            android:id="@+id/buttonMonday"
@@ -184,30 +185,30 @@
 	    </RelativeLayout>
 
 	    <Spinner
-	        android:id="@+id/spinner1"
+	        android:id="@+id/spinnerSoundFile"
 	        android:layout_width="200dp"
 	        android:layout_height="wrap_content"
 	        android:layout_alignRight="@+id/relativeLayout1"
 	        android:layout_below="@+id/relativeLayout1"
 	        android:layout_marginTop="8dp"
-	        android:layout_toRightOf="@+id/textView1" />
+	        android:layout_toRightOf="@+id/textViewSoundLabel" />
 
 	    <SeekBar
-	        android:id="@+id/seekBar1"
+	        android:id="@+id/seekBarVolume"
 	        android:layout_marginTop="7dp"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@+id/textView2"
-	        android:layout_alignRight="@+id/spinner1"
-	        android:layout_below="@+id/spinner1"
+	        android:layout_toRightOf="@+id/textViewVolumeLabel"
+	        android:layout_alignRight="@+id/spinnerSoundFile"
+	        android:layout_below="@+id/spinnerSoundFile"
 	        android:layout_marginRight="4dp" />
 
 	    <TextView
-	        android:id="@+id/textView1"
+	        android:id="@+id/textViewSoundLabel"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_alignBaseline="@+id/spinner1"
-	        android:layout_alignBottom="@+id/spinner1"
+	        android:layout_alignBaseline="@+id/spinnerSoundFile"
+	        android:layout_alignBottom="@+id/spinnerSoundFile"
 	        android:layout_alignLeft="@+id/relativeLayout1"
 	        android:layout_marginBottom="17dp"
 	        android:text="Sound:"
@@ -217,13 +218,13 @@
 	        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 	    <TextView
-	        android:id="@+id/textView2"
+	        android:id="@+id/textViewVolumeLabel"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textColor="#666666"
-	        android:layout_alignBottom="@+id/seekBar1"
-	        android:layout_alignBaseline="@+id/seekBar1"
-	        android:layout_alignLeft="@+id/textView1"
+	        android:layout_alignBottom="@+id/seekBarVolume"
+	        android:layout_alignBaseline="@+id/seekBarVolume"
+	        android:layout_alignLeft="@+id/textViewSoundLabel"
 	        android:layout_marginBottom="6dp"
 	        android:layout_marginRight="9dp"
 	        android:text="Volume:"
@@ -242,7 +243,8 @@
 	        android:id="@+id/buttonSave" android:layout_marginTop="5dp"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-	        android:layout_weight="1" 
+	        android:layout_weight="1"
+	        android:onClick="onClickSave"
 	        android:text="Save" />
 
 	    <Button
