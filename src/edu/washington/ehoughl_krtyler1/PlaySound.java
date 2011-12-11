@@ -12,7 +12,7 @@ public class PlaySound extends Activity{
 	private SoundPool soundPool;
 	private int soundID; // the sound file
 	private boolean loaded = false; // tells us if the sound file is loaded or not
-	private int counter = 1; // used to loop through sound until it reaches maximum volume
+	private int counter = 15; // used to loop through sound until it reaches maximum volume
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -8,28 +8,42 @@ import edu.washington.ehoughl_krtyler1.R;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class AlarmClockActivity extends Activity {
-	private int hour = 8; // coming from the user -- hook into clock
-	private int minute = 35; // coming from the user -- hook into clock
+	private Integer hour; // coming from the user -- hook into clock
+	private Integer minute; // coming from the user -- hook into clock
 	private int hoursToAlarm; // calculated by comparing user time to current time
 	private int minutesToAlarm; // calculated by comparing user time to current time
 	private String alarmSet; // for toast output to tell user when alarm will go off
 	private String soundFile = "angry_cat"; // coming from user -- hook into sound selection
-	
+	private TimePicker timePicker1;
+	private Button buttonSave;
+
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Intent intent = new Intent(AlarmClockActivity.this, OneTimeAlarm.class); 
+                
+        timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
+        Toast.makeText(getBaseContext(),"Time selected:" + timePicker1.getCurrentHour() + ":" + timePicker1.getCurrentMinute(),Toast.LENGTH_SHORT).show();
+        
+        minute = timePicker1.getCurrentMinute();
+    	hour = timePicker1.getCurrentHour();
+    	
+    	Intent intent = new Intent(AlarmClockActivity.this, OneTimeAlarm.class); 
         intent.putExtra("soundFile", soundFile); // passing this to the intent
         PendingIntent sender = PendingIntent.getBroadcast(AlarmClockActivity.this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        
-        // get todays time and compare to what the alarm is set to
+
+    	// get todays time and compare to what the alarm is set to
         Calendar today = Calendar.getInstance();
         Calendar alarmDay = Calendar.getInstance();
       
@@ -79,5 +93,11 @@ public class AlarmClockActivity extends Activity {
         AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP, today.getTimeInMillis(), sender);
         Toast.makeText(this, alarmSet, Toast.LENGTH_LONG).show();
+ 
+        
     } 
+    
+    public void onClickSave(View view){
+    	
+    	   }
 }
