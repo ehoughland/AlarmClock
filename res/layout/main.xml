@@ -197,7 +197,8 @@
 	        android:layout_alignRight="@+id/relativeLayout1"
 	        android:layout_below="@+id/relativeLayout1"
 	        android:layout_marginTop="8dp"
-	        android:layout_toRightOf="@+id/textViewSoundLabel" />
+	        android:layout_toRightOf="@+id/textViewSoundLabel"
+	        android:entries="@array/sounds" />
 
 	    <SeekBar
 	        android:id="@+id/seekBarVolume"

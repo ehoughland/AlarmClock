@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Wake Up Refreshed</string>
+    <string-array name="sounds">
+		<item>angry_cat</item>
+		<item>siren</item>
+	</string-array>
 </resources>
+
+

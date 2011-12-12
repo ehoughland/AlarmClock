@@ -15,9 +15,9 @@ public class OneTimeAlarm extends BroadcastReceiver{
 		int alarmHour = bundle.getInt("hour");
 		int alarmMinute = bundle.getInt("minute");
 		int alarmVolume = bundle.getInt("volume");
-		Toast.makeText(context, "Alarm worked: soundFile is " + soundFile + "hour is " + alarmHour + "minute is " + alarmMinute + "volume is " + alarmVolume, Toast.LENGTH_LONG).show();
+		Toast.makeText(context, "Alarm worked: soundFile is " + soundFile + " hour is " + alarmHour + " minute is " + alarmMinute + " volume is " + alarmVolume, Toast.LENGTH_LONG).show();
 		Intent i = new Intent(context, PlaySound.class);
-		i.putExtra("soundFile2", soundFile);
+		i.putExtra("soundFile", soundFile);
 		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(i);
 	}

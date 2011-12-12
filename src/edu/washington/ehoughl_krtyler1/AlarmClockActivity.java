@@ -1,9 +1,12 @@
 package edu.washington.ehoughl_krtyler1;
 
-import java.util.HashSet;
 import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+
 import edu.washington.ehoughl_krtyler1.AlarmClockActivity;
 import edu.washington.ehoughl_krtyler1.OneTimeAlarm;
 import edu.washington.ehoughl_krtyler1.R;
@@ -12,13 +15,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Color;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View; 
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -26,7 +29,7 @@ public class AlarmClockActivity extends Activity {
 	private int hoursToAlarm; // calculated by comparing user time to current time
 	private int minutesToAlarm; // calculated by comparing user time to current time
 	private String alarmSet; // for toast output to tell user when alarm will go off
-	private String soundFile = "angry_cat"; // coming from user -- hook into sound selection
+	//private String soundFile = "angry_cat"; // coming from user -- hook into sound selection
 
 	/** Called when the activity is first created. */
     @Override
@@ -219,7 +222,7 @@ public class AlarmClockActivity extends Activity {
         Toast.makeText(this, alarmSet, Toast.LENGTH_LONG).show();
     }
     
-    private Set<String> GetSelectedDays()
+     private Set<String> GetSelectedDays()
     {
     	int selectedTextColor = Color.parseColor("#cccccc");
     	Set<String> s = new HashSet<String>();
@@ -261,8 +264,8 @@ public class AlarmClockActivity extends Activity {
     	}
     	
     	return s;
-    }
-    
+
+    } 
     private boolean PreferencesExist()
     {
     	SharedPreferences prefs = getPreferences(MODE_PRIVATE);

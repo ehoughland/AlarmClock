@@ -20,7 +20,7 @@ public class PlaySound extends Activity{
 		setContentView(R.layout.main);
 		        
 		Bundle bundle = getIntent().getExtras();
-		String soundFile2 = bundle.getString("soundFile2");
+		String soundFile = bundle.getString("soundFile");
 		
 		//Toast.makeText(getBaseContext(), "Sound worked and soundFile is " + soundFile2, Toast.LENGTH_SHORT).show();
 		
@@ -37,7 +37,7 @@ public class PlaySound extends Activity{
 				playSound();
 			}
 		});
-		soundID = soundPool.load(this, getID(soundFile2), 1);
+		soundID = soundPool.load(this, getID(soundFile), 1);
 	}
 	
 	public void playSound(){
@@ -63,10 +63,14 @@ public class PlaySound extends Activity{
 	
 	private int getID(String soundFile){
 		int id = 0 ;
-		if( soundFile.equals("angry_cat") )
-		  	{
-				id = R.raw.angry_cat ;
-		  	}
+		if( soundFile.equals("angry_cat"))
+		{
+			id = R.raw.angry_cat ;
+		}
+		if( soundFile.equals("siren"))
+		{
+			id = R.raw.siren;
+		}
 		return id;
 	}
 
