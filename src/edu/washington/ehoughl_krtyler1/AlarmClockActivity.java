@@ -143,6 +143,7 @@ public class AlarmClockActivity extends Activity {
     	int alarmMinute = tp.getCurrentMinute();
     	int alarmVolume = sb.getProgress();
     	Set<String> days = GetSelectedDays();
+    	String[] arrDays = days.toArray(new String[0]);
     	Spinner s = (Spinner)findViewById(R.id.spinnerSoundFile);
     	String soundFile = s.getSelectedItem().toString();
     	
@@ -160,12 +161,14 @@ public class AlarmClockActivity extends Activity {
 		//let the user know it was saved.
 		Toast toast = Toast.makeText(this, "Alarm Added!", Toast.LENGTH_SHORT);
 		toast.show();
-	
+		
+		//add selected values to bundle
       	Intent intent = new Intent(AlarmClockActivity.this, OneTimeAlarm.class);
       	intent.putExtra("hour", alarmHour);
       	intent.putExtra("minute", alarmMinute);
       	intent.putExtra("volume", alarmVolume);
-        intent.putExtra("soundFile", soundFile); // passing this to the intent
+        intent.putExtra("soundFile", soundFile);
+        intent.putExtra("days", arrDays);
         PendingIntent sender = PendingIntent.getBroadcast(AlarmClockActivity.this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // get todays time and compare to what the alarm is set to
