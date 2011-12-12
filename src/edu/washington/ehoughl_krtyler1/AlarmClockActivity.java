@@ -1,15 +1,9 @@
 package edu.washington.ehoughl_krtyler1;
 
 import java.util.Calendar;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-
-import edu.washington.ehoughl_krtyler1.AlarmClockActivity;
-import edu.washington.ehoughl_krtyler1.OneTimeAlarm;
-import edu.washington.ehoughl_krtyler1.R;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -18,7 +12,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View; 
+import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -47,10 +41,9 @@ public class AlarmClockActivity extends Activity {
     private void LoadAlarmFromPreferences()
     {
     	//get parameters from preferences
-    	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    	SharedPreferences prefs = getPreferences(MODE_PRIVATE); 
 		Map<String, ?> m = prefs.getAll();
-    	 
-		int alarmHour = (Integer) m.get((Object)"alarmHour");
+    	int alarmHour = (Integer) m.get((Object)"alarmHour");
 		int alarmMinute = (Integer) m.get((Object)"alarmHour");
 		@SuppressWarnings("unchecked")
 		Set<String> days = (HashSet<String>) m.get((Object)"days");
@@ -65,8 +58,11 @@ public class AlarmClockActivity extends Activity {
 		Spinner soundFileSpinner = (Spinner)findViewById(R.id.spinnerSoundFile);
 		soundFileSpinner.setSelection(soundFile);
 		
-		if(days != null)
-		{  
+		SeekBar seekBarVolume = (SeekBar)findViewById(R.id.seekBarVolume);
+		seekBarVolume.setProgress(alarmVolume);
+		
+		if(days.size() > 0)
+		{
 			SetSelectedDays(days);
 		}
     }
@@ -149,7 +145,7 @@ public class AlarmClockActivity extends Activity {
     	Set<String> days = GetSelectedDays();
     	String[] arrDays = days.toArray(new String[0]);
     	Spinner s = (Spinner)findViewById(R.id.spinnerSoundFile);
-    	String soundFile = s.getSelectedItem().toString();
+    	int soundFile = s.getSelectedItemPosition();
     	
     	//save selections to preferences
     	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
@@ -158,12 +154,9 @@ public class AlarmClockActivity extends Activity {
 		e.putInt("alarmHour", alarmHour);
 		e.putInt("alarmMinute", alarmMinute);
 		e.putStringSet("days", days); 
-		e.putString("soundFile", soundFile);
+		e.putInt("soundFile", soundFile);
+		e.putInt("alarmVolume", alarmVolume);
 		e.commit();
-		
-		//let the user know it was saved.
-		Toast toast = Toast.makeText(this, "Alarm Added!", Toast.LENGTH_SHORT);
-		toast.show();
 		
 		//add selected values to bundle
       	Intent intent = new Intent(AlarmClockActivity.this, OneTimeAlarm.class);
@@ -276,6 +269,10 @@ public class AlarmClockActivity extends Activity {
     {
     	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		
+    	//Editor e = prefs.edit();
+		//e.clear();
+    	//e.commit();
+    	
     	if (prefs.contains("sleepwright"))
     	{
     		return true;
