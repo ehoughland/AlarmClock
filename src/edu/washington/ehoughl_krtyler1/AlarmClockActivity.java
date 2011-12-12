@@ -1,12 +1,9 @@
 package edu.washington.ehoughl_krtyler1;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.Set;
-
-
 import edu.washington.ehoughl_krtyler1.AlarmClockActivity;
 import edu.washington.ehoughl_krtyler1.OneTimeAlarm;
 import edu.washington.ehoughl_krtyler1.R;
@@ -49,20 +46,20 @@ public class AlarmClockActivity extends Activity {
     	//get parameters from preferences
     	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		Map<String, ?> m = prefs.getAll();
-    	 
-		int alarmHour = (Integer) m.get((Object)"alarmHour");
+    	int alarmHour = (Integer) m.get((Object)"alarmHour");
 		int alarmMinute = (Integer) m.get((Object)"alarmHour");
+		@SuppressWarnings("unchecked")
 		Set<String> days = (HashSet<String>) m.get((Object)"days");
 		String soundFile = (String) m.get((Object)"soundFile");
-		//Integer alarmVolume = (Integer) m.get((Object)"alarmVolume");  
+		Integer alarmVolume = (Integer) m.get((Object)"alarmVolume");  
 		
 		//make UI reflect current alarm settings
 		TimePicker tp = (TimePicker)findViewById(R.id.timePickerAlarm);
 		tp.setCurrentHour(alarmHour);
 		tp.setCurrentMinute(alarmMinute);
 		
-		if(days != null)
-		{  
+		if(days.size() > 0)
+		{
 			SetSelectedDays(days);
 		}
     }
@@ -154,6 +151,7 @@ public class AlarmClockActivity extends Activity {
 		e.putInt("alarmMinute", alarmMinute);
 		e.putStringSet("days", days); 
 		e.putString("soundFile", soundFile);
+		e.putInt("alarmVolume", alarmVolume);
 		e.commit();
 		
 		//let the user know it was saved.
@@ -269,6 +267,10 @@ public class AlarmClockActivity extends Activity {
     {
     	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		
+    	//Editor e = prefs.edit();
+		//e.clear();
+    	//e.commit();
+    	
     	if (prefs.contains("sleepwright"))
     	{
     		return true;
