@@ -52,15 +52,19 @@ public class AlarmClockActivity extends Activity {
     	 
 		int alarmHour = (Integer) m.get((Object)"alarmHour");
 		int alarmMinute = (Integer) m.get((Object)"alarmHour");
+		@SuppressWarnings("unchecked")
 		Set<String> days = (HashSet<String>) m.get((Object)"days");
-		String soundFile = (String) m.get((Object)"soundFile");
-		//Integer alarmVolume = (Integer) m.get((Object)"alarmVolume");  
+		int soundFile = (Integer) m.get((Object)"soundFile");
+		Integer alarmVolume = (Integer) m.get((Object)"alarmVolume");  
 		
 		//make UI reflect current alarm settings
 		TimePicker tp = (TimePicker)findViewById(R.id.timePickerAlarm);
 		tp.setCurrentHour(alarmHour);
 		tp.setCurrentMinute(alarmMinute);
-		 
+		
+		Spinner soundFileSpinner = (Spinner)findViewById(R.id.spinnerSoundFile);
+		soundFileSpinner.setSelection(soundFile);
+		
 		if(days != null)
 		{  
 			SetSelectedDays(days);
