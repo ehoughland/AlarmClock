@@ -209,7 +209,7 @@
 	        android:layout_alignRight="@+id/spinnerSoundFile"
 	        android:layout_below="@+id/spinnerSoundFile"
 	        android:layout_marginRight="4dp"
-	        android:max="10"
+	        android:max="15"
    			android:progress="5" />
 
 	    <TextView

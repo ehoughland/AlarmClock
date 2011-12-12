@@ -16,6 +16,7 @@ public class PlaySound extends Activity{
 	private SoundPool soundPool;
 	private int soundID; // the sound file
 	private boolean loaded = false; // tells us if the sound file is loaded or not
+	private int currentVolume;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,15 +51,13 @@ public class PlaySound extends Activity{
 	public void playSound(int volume){
 		// Getting the user sound settings
 		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-		float actualVolume = (float) audioManager
-		.getStreamVolume(AudioManager.STREAM_MUSIC);
-		float maxVolume = (float) audioManager
-		.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-		float volume2 = maxVolume/maxVolume;
+		currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+		//float volume2 = maxVolume/maxVolume;
 		// Is the sound loaded already?
 		if (loaded) {
-			soundPool.play(soundID, volume2, volume2, 1, 0, 1f);
-			Log.e("Test", "Actual volume = " + actualVolume + " max volume = " + maxVolume + " volume = " + volume2);
+			soundPool.play(soundID, 1.0f, 1.0f, 1, 0, 1f);
+			//Log.e("Test", "Actual volume = " + actualVolume + " max volume = " + maxVolume + " volume = " + volume2);
 			while (audioManager.isMusicActive()== true){
 						
 			}	
@@ -79,6 +78,8 @@ public class PlaySound extends Activity{
 	}
 	
 	public void onClickDismiss(View view){
-		
+		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+		PlaySound.this.finish();
 	}
 }
