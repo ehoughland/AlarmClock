@@ -1,5 +1,7 @@
 package edu.washington.ehoughl_krtyler1;
 
+import java.util.Arrays;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +18,7 @@ public class OneTimeAlarm extends BroadcastReceiver{
 		int alarmMinute = bundle.getInt("minute");
 		int alarmVolume = bundle.getInt("volume");
 		String[] days = bundle.getStringArray("days");
-		Toast.makeText(context, "Alarm worked: daysArray = " , Toast.LENGTH_LONG).show();
+		Toast.makeText(context, "Alarm worked: daysArray = " + Arrays.asList(days), Toast.LENGTH_LONG).show();
 		Intent i = new Intent(context, PlaySound.class);
 		i.putExtra("soundFile", soundFile);
 		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
