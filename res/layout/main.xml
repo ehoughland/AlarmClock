@@ -139,49 +139,55 @@
 	            android:layout_width="42dp"
 	            android:layout_height="42dp"
 	            android:text="S"
-	            android:onClick="onClickSunday" />
+	            android:onClick="onClickDay" />
 
 	        <Button
 	            android:id="@+id/buttonMonday"
 	            android:layout_width="42dp"
 	            android:layout_height="42dp"
 	            android:layout_toRightOf="@+id/buttonSunday"
-	            android:text="M" />
+	            android:text="M" 
+	            android:onClick="onClickDay" />
 
 	        <Button
 	            android:id="@+id/buttonTuesday"
 	            android:layout_width="42dp"
 	            android:layout_height="42dp"
 	            android:layout_toRightOf="@+id/buttonMonday"
-	            android:text="T" />
+	            android:text="T" 
+	            android:onClick="onClickDay" />
 
 	        <Button
 	            android:id="@+id/buttonWednesday"
 	            android:layout_width="42dp"
 	            android:layout_height="42dp"
 	            android:layout_toRightOf="@+id/buttonTuesday"
-	            android:text="W" />
+	            android:text="W" 
+	            android:onClick="onClickDay" />
 
 	        <Button
 	            android:id="@+id/buttonThursday"
 	            android:layout_width="42dp"
 	            android:layout_height="42dp"
 	            android:layout_toRightOf="@+id/buttonWednesday"
-	            android:text="T" />
+	            android:text="T" 
+	            android:onClick="onClickDay" />
 
 	        <Button
 	            android:id="@+id/buttonFriday"
 	            android:layout_width="42dp"
 	            android:layout_height="42dp"
 	            android:layout_toRightOf="@+id/buttonThursday"
-	            android:text="F" />
+	            android:text="F" 
+	            android:onClick="onClickDay" />
 
 	        <Button
 	            android:id="@+id/buttonSaturday"
 	            android:layout_width="42dp"
 	            android:layout_height="42dp"
 	            android:layout_toRightOf="@+id/buttonFriday"
-	            android:text="S" />
+	            android:text="S" 
+	            android:onClick="onClickDay"/>
 	    </RelativeLayout>
 
 	    <Spinner
