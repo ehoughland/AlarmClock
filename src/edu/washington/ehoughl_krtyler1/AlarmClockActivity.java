@@ -15,12 +15,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class AlarmClockActivity extends Activity {
-	private Integer hour; // coming from the user -- hook into clock
-	private Integer minute; // coming from the user -- hook into clock
 	private int hoursToAlarm; // calculated by comparing user time to current time
 	private int minutesToAlarm; // calculated by comparing user time to current time
 	private String alarmSet; // for toast output to tell user when alarm will go off
@@ -66,14 +65,31 @@ public class AlarmClockActivity extends Activity {
     
     public void onClickSave(View view)
 	{
-    	SaveAlarmToPreferences();
-    	TimePicker tp = (TimePicker) findViewById(R.id.timePickerAlarm);
-        Toast.makeText(getBaseContext(),"Time selected:" + tp.getCurrentHour() + ":" + tp.getCurrentMinute(),Toast.LENGTH_SHORT).show();
-          
-        minute = tp.getCurrentMinute();
-        hour = tp.getCurrentHour();
-      	
-      	Intent intent = new Intent(AlarmClockActivity.this, OneTimeAlarm.class); 
+    	SaveAlarmToPreferencesAndCreateAlarm(); 
+	} 
+    
+    private void SaveAlarmToPreferencesAndCreateAlarm()
+    {
+    	TimePicker tp = (TimePicker)findViewById(R.id.timePickerAlarm);	
+    	SeekBar sb = (SeekBar) findViewById(R.id.seekBarVolume);
+    	int alarmHour = tp.getCurrentHour();
+    	int alarmMinute = tp.getCurrentMinute();
+    	int alarmVolume = sb.getProgress();
+    	
+    	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    	Editor e = prefs.edit();
+		e.putBoolean("sleepwright", true);
+		e.putInt("alarmHour", alarmHour);
+		e.putInt("alarmMinute", alarmMinute);
+		e.commit();
+		
+		Toast toast = Toast.makeText(this, "Alarm Added!", Toast.LENGTH_SHORT);
+		toast.show();
+	
+      	Intent intent = new Intent(AlarmClockActivity.this, OneTimeAlarm.class);
+      	intent.putExtra("hour", alarmHour);
+      	intent.putExtra("minute", alarmMinute);
+      	intent.putExtra("volume", alarmVolume);
         intent.putExtra("soundFile", soundFile); // passing this to the intent
         PendingIntent sender = PendingIntent.getBroadcast(AlarmClockActivity.this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -81,8 +97,8 @@ public class AlarmClockActivity extends Activity {
         Calendar today = Calendar.getInstance();
         Calendar alarmDay = Calendar.getInstance();
     
-        alarmDay.set(Calendar.HOUR, hour);
-        alarmDay.set(Calendar.MINUTE, minute);
+        alarmDay.set(Calendar.HOUR, alarmHour);
+        alarmDay.set(Calendar.MINUTE, alarmMinute);
         alarmDay.set(Calendar.SECOND, 0);
       
         // getting the current hour and minute in case its the next day
@@ -90,7 +106,7 @@ public class AlarmClockActivity extends Activity {
         int curMinute = today.get(Calendar.MINUTE);
       
         // add day if the time has already passed
-        if(hour<= curHour && minute <= curMinute){
+        if(alarmHour<= curHour && alarmMinute <= curMinute){
         	alarmDay.add(Calendar.DAY_OF_MONTH, 1);
         }
       
@@ -129,23 +145,6 @@ public class AlarmClockActivity extends Activity {
         AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP, today.getTimeInMillis(), sender);
         Toast.makeText(this, alarmSet, Toast.LENGTH_LONG).show();
-	} 
-    
-    private void SaveAlarmToPreferences()
-    {
-    	TimePicker tp = (TimePicker)findViewById(R.id.timePickerAlarm);	
-    	int alarmHour = tp.getCurrentHour();
-    	int alarmMinute = tp.getCurrentMinute();
-    	
-    	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-    	Editor e = prefs.edit();
-		e.putBoolean("sleepwright", true);
-		e.putInt("alarmHour", alarmHour);
-		e.putInt("alarmMinute", alarmMinute);
-		e.commit();
-		
-		Toast toast = Toast.makeText(this, "Alarm Added!", Toast.LENGTH_SHORT);
-		toast.show();
     }
     
     private boolean PreferencesExist()
