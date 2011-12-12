@@ -253,7 +253,43 @@ public class AlarmClockActivity extends Activity {
     private void SetAlarm(int alarmHour, int alarmMinute, int alarmVolume, String soundFileString, Set<String> days)
     {
     	String alarmSet; // for toast output to tell user when alarm will go off
-    	String[] arrDays = days.toArray(new String[0]);
+    	
+    	int[] intValDays = new int[days.size()];
+    	int i = 0;
+    	
+    	for(String s : days)
+    	{
+    		if(s.equalsIgnoreCase("Sunday"))
+    		{
+    			intValDays[i] = 0;
+    		}
+    		else if(s.equalsIgnoreCase("Monday"))
+    		{
+    			intValDays[i] = 1;
+    		}
+    		else if(s.equalsIgnoreCase("Tuesday"))
+    		{
+    			intValDays[i] = 2;
+    		}
+    		else if(s.equalsIgnoreCase("Wednesday"))
+    		{
+    			intValDays[i] = 3;
+    		}
+    		else if(s.equalsIgnoreCase("Thursday"))
+    		{
+    			intValDays[i] = 4;
+    		}
+    		else if(s.equalsIgnoreCase("Friday"))
+    		{
+    			intValDays[i] = 5;
+    		}
+    		else if(s.equalsIgnoreCase("Saturday"))
+    		{
+    			intValDays[i] = 6;
+    		}
+    		
+    		i++;
+    	}
     	
     	//add selected values to bundle
       	Intent intent = new Intent(AlarmClockActivity.this, OneTimeAlarm.class);
@@ -261,7 +297,7 @@ public class AlarmClockActivity extends Activity {
       	intent.putExtra("minute", alarmMinute);
       	intent.putExtra("volume", alarmVolume);
         intent.putExtra("soundFile", soundFileString);
-        intent.putExtra("days", arrDays);
+        intent.putExtra("days", intValDays);
         PendingIntent sender = PendingIntent.getBroadcast(AlarmClockActivity.this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         int minutesToAlarm = calculateNextAlarm(alarmHour, alarmMinute);
