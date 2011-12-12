@@ -207,7 +207,9 @@
 	        android:layout_toRightOf="@+id/textViewVolumeLabel"
 	        android:layout_alignRight="@+id/spinnerSoundFile"
 	        android:layout_below="@+id/spinnerSoundFile"
-	        android:layout_marginRight="4dp" />
+	        android:layout_marginRight="4dp"
+	        android:max="10"
+   			android:progress="5" />
 
 	    <TextView
 	        android:id="@+id/textViewSoundLabel"
@@ -250,8 +252,7 @@
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:onClick="onClickSave"
-	        android:text="Save" />
+	        android:onClick="onClickSave" />
 
 	    <Button
 	        android:id="@+id/buttonCancel" android:layout_marginTop="5dp"
