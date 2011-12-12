@@ -146,6 +146,7 @@ public class AlarmClockActivity extends Activity {
     	String[] arrDays = days.toArray(new String[0]);
     	Spinner s = (Spinner)findViewById(R.id.spinnerSoundFile);
     	int soundFile = s.getSelectedItemPosition();
+    	String soundFileString = s.getSelectedItem().toString();
     	
     	//save selections to preferences
     	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
@@ -163,7 +164,7 @@ public class AlarmClockActivity extends Activity {
       	intent.putExtra("hour", alarmHour);
       	intent.putExtra("minute", alarmMinute);
       	intent.putExtra("volume", alarmVolume);
-        intent.putExtra("soundFile", soundFile);
+        intent.putExtra("soundFile", soundFileString);
         intent.putExtra("days", arrDays);
         PendingIntent sender = PendingIntent.getBroadcast(AlarmClockActivity.this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 

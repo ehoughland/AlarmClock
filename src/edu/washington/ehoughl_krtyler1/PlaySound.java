@@ -1,5 +1,7 @@
 package edu.washington.ehoughl_krtyler1;
 
+import java.util.Arrays;
+
 import edu.washington.ehoughl_krtyler1.R;
 import android.app.Activity;
 import android.media.AudioManager;
@@ -7,22 +9,25 @@ import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 public class PlaySound extends Activity{
 	private SoundPool soundPool;
 	private int soundID; // the sound file
 	private boolean loaded = false; // tells us if the sound file is loaded or not
-	private int counter = 15; // used to loop through sound until it reaches maximum volume
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-		        
+		setContentView(R.layout.alarm);
+		
 		Bundle bundle = getIntent().getExtras();
 		String soundFile = bundle.getString("soundFile");
-		
-		//Toast.makeText(getBaseContext(), "Sound worked and soundFile is " + soundFile2, Toast.LENGTH_SHORT).show();
+		int alarmHour = bundle.getInt("hour");
+		int alarmMinute = bundle.getInt("minute");
+		String[] days = bundle.getStringArray("days");
+		//Toast.makeText(getBaseContext(), "hour = " + alarmHour + " minute = " + alarmMinute + " volume = " + alarmVolume + " days = " + Arrays.asList(days), Toast.LENGTH_LONG).show();
 		
 		// Set the hardware buttons to control the music
 		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -34,30 +39,29 @@ public class PlaySound extends Activity{
 			@Override
 			public void onLoadComplete(SoundPool soundPool, int sampleId,int status) {
 				loaded = true;
-				playSound();
+				Bundle b = getIntent().getExtras();
+				int alarmVolume = b.getInt("volume");
+				playSound(alarmVolume);
 			}
 		});
 		soundID = soundPool.load(this, getID(soundFile), 1);
 	}
 	
-	public void playSound(){
+	public void playSound(int volume){
 		// Getting the user sound settings
 		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		float actualVolume = (float) audioManager
+		.getStreamVolume(AudioManager.STREAM_MUSIC);
 		float maxVolume = (float) audioManager
-				.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-		float volume;
+		.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+		float volume2 = maxVolume/maxVolume;
 		// Is the sound loaded already?
 		if (loaded) {
-				while (counter <= maxVolume)
-				{
-					volume = counter/maxVolume;
-					soundPool.play(soundID, volume, volume, 1, 0, 1f);
-					Log.e("Test", "Played sound at " + volume + " volume");
-					while (audioManager.isMusicActive()== true){
+			soundPool.play(soundID, volume2, volume2, 1, 0, 1f);
+			Log.e("Test", "Actual volume = " + actualVolume + " max volume = " + maxVolume + " volume = " + volume2);
+			while (audioManager.isMusicActive()== true){
 						
-					}
-					counter++;
-				}
+			}	
 		}
 	}
 	
@@ -73,5 +77,8 @@ public class PlaySound extends Activity{
 		}
 		return id;
 	}
-
+	
+	public void onClickDismiss(View view){
+		
+	}
 }
