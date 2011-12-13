@@ -220,7 +220,7 @@ public class AlarmClockActivity extends Activity {
 		e.putBoolean("sleepwright", true);
 		e.putInt("alarmHour", alarmHour);
 		e.putInt("alarmMinute", alarmMinute);
-		e.putStringSet("days", days); 
+		e.putStringSet("days", days);
 		e.putInt("soundFile", soundFile);
 		e.putInt("alarmVolume", alarmVolume);
 		e.putBoolean("alarmActive", active);
@@ -329,7 +329,6 @@ public class AlarmClockActivity extends Activity {
         	alarmSet = "Alarm set for " + hoursToAlarm + " hour(s) and " + minutesToAlarm % 60 + " minutes(s) from now";
         }
         
-        
         today.setTimeInMillis(System.currentTimeMillis());
         today.add(Calendar.MINUTE, minutesToAlarm);
         // Schedule the alarm!
@@ -359,6 +358,9 @@ public class AlarmClockActivity extends Activity {
 		b.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
 		buttonON.setTextColor(Color.parseColor("black"));
 		buttonON.getBackground().clearColorFilter();
+		
+		Toast.makeText(this, "Alarm disabled.", Toast.LENGTH_LONG).show();
+		
 		cancelAlarm();
     }
     
@@ -458,7 +460,7 @@ public class AlarmClockActivity extends Activity {
 		
     	//Editor e = prefs.edit();
 		//e.clear();  
-    	//e.commit(); 
+    	//e.commit();
     	
     	if (prefs.contains("sleepwright"))
     	{
