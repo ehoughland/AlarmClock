@@ -3,11 +3,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" >
 	
-	<TextView android:id="@+id/textViewAlarmTitle" android:layout_width="match_parent"
-		android:layout_height="40dip" android:gravity="center_vertical|center_horizontal"
-	    android:text="Alarm Name" android:textAppearance="?android:attr/textAppearanceMedium"
-	    android:textColor="#b2b2b2" android:background="#cccccc" android:typeface="normal" />
-	    
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:background="#cccccc"
+    android:layout_width="match_parent" android:layout_height="44dp">
+
+		<TextView
+		    android:id="@+id/textViewAlarmTitle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_centerHorizontal="true"
+		    android:layout_centerVertical="true"
+		    android:background="#cccccc"
+		    android:text="Sleepwright"
+		    android:textSize="24dp"
+		    android:textColor="#666666" />
+
+		<Button
+		    android:id="@+id/buttonActivateDeactivate"
+		    android:layout_width="60dp"
+		    android:layout_height="42dp"
+		    android:layout_alignParentRight="true"
+		    android:onClick="onClickActivateDeactivate"
+		    android:text="OFF"
+		    android:layout_marginTop="4dp" />
+	
+	</RelativeLayout>
+	
 	<View android:layout_width="match_parent" android:layout_height="2dip" android:background="#4d4d4d" />
     
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,8 +41,8 @@
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentTop="true"
 		    android:layout_centerHorizontal="true"
-		    android:layout_marginTop="13dp"
-		    android:layout_marginBottom="13dp"
+		    android:layout_marginTop="12dp"
+		    android:layout_marginBottom="12dp"
 		    />
 		
 		<View
@@ -196,13 +216,13 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignRight="@+id/relativeLayout1"
 	        android:layout_below="@+id/relativeLayout1"
-	        android:layout_marginTop="8dp"
+	        android:layout_marginTop="6dp"
 	        android:layout_toRightOf="@+id/textViewSoundLabel"
 	        android:entries="@array/sounds" />
 
 	    <SeekBar
 	        android:id="@+id/seekBarVolume"
-	        android:layout_marginTop="7dp"
+	        android:layout_marginTop="6dp"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@+id/textViewVolumeLabel"
@@ -221,7 +241,7 @@
 	        android:layout_alignLeft="@+id/relativeLayout1"
 	        android:layout_marginBottom="17dp"
 	        android:text="Sound:"
-	        android:layout_marginLeft="4dp"
+	        android:layout_marginLeft="2dp"
 	        android:layout_marginRight="7dp"
 	        android:textColor="#666666"
 	        android:textAppearance="?android:attr/textAppearanceSmall" />

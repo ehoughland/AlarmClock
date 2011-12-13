@@ -176,6 +176,24 @@ public class AlarmClockActivity extends Activity {
     	MarkDayButtonsSelected(selectedButtonList);
     }
     
+    public void onClickActivateDeactivate(View view)
+    {
+    	Button b = (Button)view;
+    	
+    	if(b.getCurrentTextColor() != Color.parseColor("#cccccc"))
+    	{
+    		b.setText("ON");
+    		b.setTextColor(Color.parseColor("#cccccc"));
+    		b.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
+    	}
+    	else
+    	{
+    		b.setText("OFF");
+    		b.setTextColor(Color.parseColor("black"));
+    		b.getBackground().clearColorFilter();
+    	}
+    }
+    
     public void onClickDay(View view)
 	{
     	Button b = (Button)view;
@@ -197,7 +215,7 @@ public class AlarmClockActivity extends Activity {
     	SaveAlarm();
 	} 
     
-    private void SavePreferences(int alarmHour, int alarmMinute, int alarmVolume, int soundFile, Set<String> days)
+    private void SavePreferences(int alarmHour, int alarmMinute, int alarmVolume, int soundFile, Set<String> days, boolean active)
     {
     	//save selections to preferences
     	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
@@ -208,6 +226,7 @@ public class AlarmClockActivity extends Activity {
 		e.putStringSet("days", days); 
 		e.putInt("soundFile", soundFile);
 		e.putInt("alarmVolume", alarmVolume);
+		e.putBoolean("active", active);
 		e.commit();
     }
     
@@ -250,7 +269,7 @@ public class AlarmClockActivity extends Activity {
         return minutesToAlarm;
     }
     
-    private void SetAlarm(int alarmHour, int alarmMinute, int alarmVolume, String soundFileString, Set<String> days)
+    private void SetAlarm(int alarmHour, int alarmMinute, int alarmVolume, String soundFileString, Set<String> days, boolean alarmActive)
     {
     	String alarmSet; // for toast output to tell user when alarm will go off
     	
@@ -261,7 +280,7 @@ public class AlarmClockActivity extends Activity {
     	{
     		if(s.equalsIgnoreCase("Sunday"))
     		{
-    			intValDays[i] = 0;
+    			intValDays[i] = 0; 
     		}
     		else if(s.equalsIgnoreCase("Monday"))
     		{
@@ -338,10 +357,18 @@ public class AlarmClockActivity extends Activity {
     	Spinner s = (Spinner)findViewById(R.id.spinnerSoundFile);
     	int soundFile = s.getSelectedItemPosition();
     	String soundFileString = s.getSelectedItem().toString();
+    	boolean alarmActive = false;
+    	
+    	int selectedTextColor = Color.parseColor("#cccccc");
+    	Button b = (Button)findViewById(R.id.buttonActivateDeactivate);
+    	if(b.getCurrentTextColor() == selectedTextColor)
+    	{
+    		alarmActive = true;
+    	}
     	
     	UpdateSuggestedSleepTimes(alarmHour, alarmMinute);
-    	SavePreferences(alarmHour, alarmMinute, alarmVolume, soundFile, days);
-    	SetAlarm(alarmHour, alarmMinute, alarmVolume, soundFileString, days);
+    	SavePreferences(alarmHour, alarmMinute, alarmVolume, soundFile, days, alarmActive);
+    	SetAlarm(alarmHour, alarmMinute, alarmVolume, soundFileString, days, alarmActive);
     }
     
      private Set<String> GetSelectedDays()

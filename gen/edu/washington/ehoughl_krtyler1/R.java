@@ -23,30 +23,31 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int buttonCancel=0x7f080017;
-        public static final int buttonFriday=0x7f080010;
-        public static final int buttonMonday=0x7f08000c;
-        public static final int buttonSaturday=0x7f080011;
-        public static final int buttonSave=0x7f080016;
-        public static final int buttonSunday=0x7f08000b;
-        public static final int buttonThursday=0x7f08000f;
-        public static final int buttonTuesday=0x7f08000d;
-        public static final int buttonWednesday=0x7f08000e;
-        public static final int rel1=0x7f080003;
-        public static final int relativeLayout1=0x7f08000a;
-        public static final int seekBarVolume=0x7f080014;
-        public static final int spinnerSoundFile=0x7f080012;
+        public static final int buttonActivateDeactivate=0x7f080001;
+        public static final int buttonCancel=0x7f080018;
+        public static final int buttonFriday=0x7f080011;
+        public static final int buttonMonday=0x7f08000d;
+        public static final int buttonSaturday=0x7f080012;
+        public static final int buttonSave=0x7f080017;
+        public static final int buttonSunday=0x7f08000c;
+        public static final int buttonThursday=0x7f080010;
+        public static final int buttonTuesday=0x7f08000e;
+        public static final int buttonWednesday=0x7f08000f;
+        public static final int rel1=0x7f080004;
+        public static final int relativeLayout1=0x7f08000b;
+        public static final int seekBarVolume=0x7f080015;
+        public static final int spinnerSoundFile=0x7f080013;
         public static final int textViewAlarmTitle=0x7f080000;
-        public static final int textViewBedTime1=0x7f080004;
-        public static final int textViewBedTime1AMPM=0x7f080005;
-        public static final int textViewBedTime2=0x7f080006;
-        public static final int textViewBedTime2AMPM=0x7f080007;
-        public static final int textViewBedTime3=0x7f080008;
-        public static final int textViewBedTime3AMPM=0x7f080009;
-        public static final int textViewSoundLabel=0x7f080013;
-        public static final int textViewSuggestion=0x7f080002;
-        public static final int textViewVolumeLabel=0x7f080015;
-        public static final int timePickerAlarm=0x7f080001;
+        public static final int textViewBedTime1=0x7f080005;
+        public static final int textViewBedTime1AMPM=0x7f080006;
+        public static final int textViewBedTime2=0x7f080007;
+        public static final int textViewBedTime2AMPM=0x7f080008;
+        public static final int textViewBedTime3=0x7f080009;
+        public static final int textViewBedTime3AMPM=0x7f08000a;
+        public static final int textViewSoundLabel=0x7f080014;
+        public static final int textViewSuggestion=0x7f080003;
+        public static final int textViewVolumeLabel=0x7f080016;
+        public static final int timePickerAlarm=0x7f080002;
     }
     public static final class layout {
         public static final int main=0x7f030000;
