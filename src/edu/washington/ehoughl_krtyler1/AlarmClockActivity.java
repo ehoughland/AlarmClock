@@ -73,7 +73,7 @@ public class AlarmClockActivity extends Activity {
     {
         Calendar c = Calendar.getInstance();
     
-        c.set(Calendar.HOUR, alarmHour);
+        c.set(Calendar.HOUR_OF_DAY, alarmHour);
         c.set(Calendar.MINUTE, alarmMinute);
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.AM_PM, alarmHour < 12 ? 0 : 1);
@@ -82,16 +82,16 @@ public class AlarmClockActivity extends Activity {
         
         Date date = c.getTime();
         String bedTime1 = (new SimpleDateFormat("hh:mm aa")).format(date);
-        c.add(Calendar.HOUR, 9);
+        c.add(Calendar.HOUR_OF_DAY, 9);
         
-        c.add(Calendar.HOUR, -7);
+        c.add(Calendar.HOUR_OF_DAY, -7);
         c.add(Calendar.MINUTE, -30);
         date = c.getTime();
         String bedTime2 = (new SimpleDateFormat("hh:mm aa")).format(date);
-        c.add(Calendar.HOUR, 7);
+        c.add(Calendar.HOUR_OF_DAY, 7);
         c.add(Calendar.MINUTE, 30);
         
-        c.add(Calendar.HOUR, -6);
+        c.add(Calendar.HOUR_OF_DAY, -6);
         date = c.getTime();
         String bedTime3 = (new SimpleDateFormat("hh:mm aa")).format(date);
         
@@ -176,24 +176,6 @@ public class AlarmClockActivity extends Activity {
     	MarkDayButtonsSelected(selectedButtonList);
     }
     
-    public void onClickActivateDeactivate(View view)
-    {
-    	Button b = (Button)view;
-    	
-    	if(b.getCurrentTextColor() != Color.parseColor("#cccccc"))
-    	{
-    		b.setText("ON");
-    		b.setTextColor(Color.parseColor("#cccccc"));
-    		b.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
-    	}
-    	else
-    	{
-    		b.setText("OFF");
-    		b.setTextColor(Color.parseColor("black"));
-    		b.getBackground().clearColorFilter();
-    	}
-    }
-    
     public void onClickDay(View view)
 	{
     	Button b = (Button)view;
@@ -209,11 +191,6 @@ public class AlarmClockActivity extends Activity {
     		b.getBackground().clearColorFilter();
     	}
 	}
-    
-    public void onClickSave(View view)
-	{
-    	SaveAlarm();
-	} 
     
     private void SavePreferences(int alarmHour, int alarmMinute, int alarmVolume, int soundFile, Set<String> days, boolean active)
     {
@@ -238,12 +215,12 @@ public class AlarmClockActivity extends Activity {
         Calendar today = Calendar.getInstance();
         Calendar alarmDay = Calendar.getInstance();
     
-        alarmDay.set(Calendar.HOUR, alarmHour);
+        alarmDay.set(Calendar.HOUR_OF_DAY, alarmHour);
         alarmDay.set(Calendar.MINUTE, alarmMinute);
         alarmDay.set(Calendar.SECOND, 0);
       
         // getting the current hour and minute in case its the next day
-        int curHour = today.get(Calendar.HOUR);
+        int curHour = today.get(Calendar.HOUR_OF_DAY);
         int curMinute = today.get(Calendar.MINUTE);
       
         // add day if the time has already passed
@@ -254,9 +231,6 @@ public class AlarmClockActivity extends Activity {
       
         // difference in times
         int diff = (int) (alarmDay.getTimeInMillis() - today.getTimeInMillis());
-      
-        today.setTimeInMillis(System.currentTimeMillis());
-        today.add(Calendar.MILLISECOND, 5000); // add diff here instead of 5000 -- just running in 5 seconds for testing
         minutesToAlarm = diff/60000;
         
         if(minutesToAlarm < 0){
@@ -271,8 +245,6 @@ public class AlarmClockActivity extends Activity {
     
     private void SetAlarm(int alarmHour, int alarmMinute, int alarmVolume, String soundFileString, Set<String> days, boolean alarmActive)
     {
-    	String alarmSet; // for toast output to tell user when alarm will go off
-    	
     	int[] intValDays = new int[days.size()];
     	int i = 0;
     	
@@ -280,44 +252,50 @@ public class AlarmClockActivity extends Activity {
     	{
     		if(s.equalsIgnoreCase("Sunday"))
     		{
-    			intValDays[i] = 0; 
+    			intValDays[i] = 6;
     		}
     		else if(s.equalsIgnoreCase("Monday"))
     		{
-    			intValDays[i] = 1;
+    			intValDays[i] = 7;
     		}
     		else if(s.equalsIgnoreCase("Tuesday"))
     		{
-    			intValDays[i] = 2;
+    			intValDays[i] = 1;
     		}
     		else if(s.equalsIgnoreCase("Wednesday"))
     		{
-    			intValDays[i] = 3;
+    			intValDays[i] = 2;
     		}
     		else if(s.equalsIgnoreCase("Thursday"))
     		{
-    			intValDays[i] = 4;
+    			intValDays[i] = 3;
     		}
     		else if(s.equalsIgnoreCase("Friday"))
     		{
-    			intValDays[i] = 5;
+    			intValDays[i] = 4;
     		}
     		else if(s.equalsIgnoreCase("Saturday"))
     		{
-    			intValDays[i] = 6;
+    			intValDays[i] = 5;
     		}
     		
     		i++;
     	}
+    	scheduleIntent(alarmHour, alarmMinute, alarmVolume, soundFileString, intValDays);
+    }
+    
+    public void scheduleIntent(int alarmHour, int alarmMinute, int alarmVolume, String soundFileString, int[] intValDays){
     	
+    	Calendar today = Calendar.getInstance();
+    	String alarmSet; // for toast output to tell user when alarm will go off
     	//add selected values to bundle
-      	Intent intent = new Intent(AlarmClockActivity.this, OneTimeAlarm.class);
+      	Intent intent = new Intent(getBaseContext(), OneTimeAlarm.class);
       	intent.putExtra("hour", alarmHour);
       	intent.putExtra("minute", alarmMinute);
       	intent.putExtra("volume", alarmVolume);
         intent.putExtra("soundFile", soundFileString);
         intent.putExtra("days", intValDays);
-        PendingIntent sender = PendingIntent.getBroadcast(AlarmClockActivity.this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent sender = PendingIntent.getBroadcast(getBaseContext(),33, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         int minutesToAlarm = calculateNextAlarm(alarmHour, alarmMinute);
         int hoursToAlarm = minutesToAlarm / 60;
@@ -330,19 +308,61 @@ public class AlarmClockActivity extends Activity {
         {  
         	alarmSet = "Alarm set for " + hoursToAlarm + " hour(s) and " + minutesToAlarm % 60 + " minutes(s) from now";
         }
-      
+        
+        
+        today.setTimeInMillis(System.currentTimeMillis());
+        today.add(Calendar.MINUTE, minutesToAlarm);
         // Schedule the alarm!
         AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP, minutesToAlarm * 60000, sender);
+        am.set(AlarmManager.RTC_WAKEUP, today.getTimeInMillis(), sender);
         Toast.makeText(this, alarmSet, Toast.LENGTH_LONG).show();
     }
     
-    public void onClickCancel(View view)
+    public void cancelIntent(int alarmHour, int alarmMinute, int alarmVolume, String soundFileString, int[] intValDays){
+    	Intent intent = new Intent(getBaseContext(), OneTimeAlarm.class);
+      	intent.putExtra("hour", alarmHour);
+      	intent.putExtra("minute", alarmMinute);
+      	intent.putExtra("volume", alarmVolume);
+        intent.putExtra("soundFile", soundFileString);
+        intent.putExtra("days", intValDays);
+        PendingIntent sender = PendingIntent.getBroadcast(getBaseContext(),33, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+        am.cancel(sender); // cancel
+    }
+    
+    public void onClickOFF(View view)
     {
-    	if(PreferencesExist())
-        {
-        	LoadAlarmFromPreferences(); 
-        }
+    	Button b = (Button)view;
+    	Button buttonON = (Button)findViewById(R.id.buttonON);
+    	
+    	if(b.getCurrentTextColor() != Color.parseColor("#cccccc"))
+    	{
+    		b.setTextColor(Color.parseColor("#cccccc"));
+    		b.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
+    		buttonON.setTextColor(Color.parseColor("black"));
+    		buttonON.getBackground().clearColorFilter();
+    		CancelAlarm();
+    	}
+    }
+    
+    public void CancelAlarm()
+    {
+    	
+    }
+    
+    public void onClickON(View view)
+    {
+    	Button b = (Button)view;
+    	Button buttonOFF = (Button)findViewById(R.id.buttonOFF);
+    	
+    	if(b.getCurrentTextColor() != Color.parseColor("#cccccc"))
+    	{
+    		b.setTextColor(Color.parseColor("#cccccc"));
+    		b.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
+    		buttonOFF.setTextColor(Color.parseColor("black"));
+    		buttonOFF.getBackground().clearColorFilter();
+    		SaveAlarm();
+    	}
     }
     
     private void SaveAlarm()
@@ -358,13 +378,6 @@ public class AlarmClockActivity extends Activity {
     	int soundFile = s.getSelectedItemPosition();
     	String soundFileString = s.getSelectedItem().toString();
     	boolean alarmActive = false;
-    	
-    	int selectedTextColor = Color.parseColor("#cccccc");
-    	Button b = (Button)findViewById(R.id.buttonActivateDeactivate);
-    	if(b.getCurrentTextColor() == selectedTextColor)
-    	{
-    		alarmActive = true;
-    	}
     	
     	UpdateSuggestedSleepTimes(alarmHour, alarmMinute);
     	SavePreferences(alarmHour, alarmMinute, alarmVolume, soundFile, days, alarmActive);

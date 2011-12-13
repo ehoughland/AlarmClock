@@ -23,12 +23,12 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int buttonActivateDeactivate=0x7f080001;
-        public static final int buttonCancel=0x7f080018;
+        public static final int buttonDismiss=0x7f080000;
         public static final int buttonFriday=0x7f080011;
         public static final int buttonMonday=0x7f08000d;
+        public static final int buttonOFF=0x7f080018;
+        public static final int buttonON=0x7f080017;
         public static final int buttonSaturday=0x7f080012;
-        public static final int buttonSave=0x7f080017;
         public static final int buttonSunday=0x7f08000c;
         public static final int buttonThursday=0x7f080010;
         public static final int buttonTuesday=0x7f08000e;
@@ -37,7 +37,7 @@ public final class R {
         public static final int relativeLayout1=0x7f08000b;
         public static final int seekBarVolume=0x7f080015;
         public static final int spinnerSoundFile=0x7f080013;
-        public static final int textViewAlarmTitle=0x7f080000;
+        public static final int textViewAlarmTitle=0x7f080001;
         public static final int textViewBedTime1=0x7f080005;
         public static final int textViewBedTime1AMPM=0x7f080006;
         public static final int textViewBedTime2=0x7f080007;
@@ -50,7 +50,8 @@ public final class R {
         public static final int timePickerAlarm=0x7f080002;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
+        public static final int alarm=0x7f030000;
+        public static final int main=0x7f030001;
     }
     public static final class raw {
         public static final int angry_cat=0x7f040000;

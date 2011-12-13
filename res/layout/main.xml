@@ -16,15 +16,6 @@
 		    android:text="Sleepwright"
 		    android:textSize="24dp"
 		    android:textColor="#666666" />
-
-		<Button
-		    android:id="@+id/buttonActivateDeactivate"
-		    android:layout_width="60dp"
-		    android:layout_height="42dp"
-		    android:layout_alignParentRight="true"
-		    android:onClick="onClickActivateDeactivate"
-		    android:text="OFF"
-		    android:layout_marginTop="4dp" />
 	
 	</RelativeLayout>
 	
@@ -229,7 +220,7 @@
 	        android:layout_alignRight="@+id/spinnerSoundFile"
 	        android:layout_below="@+id/spinnerSoundFile"
 	        android:layout_marginRight="4dp"
-	        android:max="10"
+	        android:max="15"
    			android:progress="5" />
 
 	    <TextView
@@ -269,20 +260,20 @@
 	    android:background="#cccccc" >
 	    
 	    <Button
-	        android:id="@+id/buttonSave" android:layout_marginTop="5dp"
+	        android:id="@+id/buttonON" android:layout_marginTop="5dp"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:onClick="onClickSave"
-	        android:text="Save" />
+	        android:onClick="onClickON"
+	        android:text="ON" />
 
 	    <Button
-	        android:id="@+id/buttonCancel" android:layout_marginTop="5dp"
+	        android:id="@+id/buttonOFF" android:layout_marginTop="5dp"
 	        android:layout_width="0dp"
 	        android:layout_weight="1" 
 	        android:layout_height="wrap_content"
-	        android:onClick="onClickCancel"
-	        android:text="Cancel" />
+	        android:onClick="onClickOFF"
+	        android:text="OFF" />
 	
 	</LinearLayout>
 	  	    
