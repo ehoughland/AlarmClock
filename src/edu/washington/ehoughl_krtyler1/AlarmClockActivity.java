@@ -49,6 +49,28 @@ public class AlarmClockActivity extends Activity {
 		Set<String> days = (HashSet<String>) m.get((Object)"days");
 		int soundFile = (Integer) m.get((Object)"soundFile");
 		Integer alarmVolume = (Integer) m.get((Object)"alarmVolume");
+		boolean alarmActive = (Boolean) m.get((Object)"alarmActive");
+		
+		if(alarmActive)
+		{
+			Button buttonON = (Button)findViewById(R.id.buttonON);
+	    	Button buttonOFF = (Button)findViewById(R.id.buttonOFF);
+	    	
+			buttonON.setTextColor(Color.parseColor("#cccccc"));
+			buttonON.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
+			buttonOFF.setTextColor(Color.parseColor("black"));
+			buttonOFF.getBackground().clearColorFilter();
+		}
+		else
+		{
+			Button buttonON = (Button)findViewById(R.id.buttonON);
+	    	Button buttonOFF = (Button)findViewById(R.id.buttonOFF);
+	    	
+			buttonOFF.setTextColor(Color.parseColor("#cccccc"));
+			buttonOFF.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
+			buttonON.setTextColor(Color.parseColor("black"));
+			buttonON.getBackground().clearColorFilter();
+		}
 		
 		//make UI reflect current alarm settings
 		TimePicker tp = (TimePicker)findViewById(R.id.timePickerAlarm);
@@ -76,10 +98,8 @@ public class AlarmClockActivity extends Activity {
         c.set(Calendar.HOUR_OF_DAY, alarmHour);
         c.set(Calendar.MINUTE, alarmMinute);
         c.set(Calendar.SECOND, 0);
-        c.set(Calendar.AM_PM, alarmHour < 12 ? 0 : 1);
         
-        c.add(Calendar.HOUR, -9);
-        
+        c.add(Calendar.HOUR_OF_DAY, -9);
         Date date = c.getTime();
         String bedTime1 = (new SimpleDateFormat("hh:mm aa")).format(date);
         c.add(Calendar.HOUR_OF_DAY, 9);
@@ -203,7 +223,7 @@ public class AlarmClockActivity extends Activity {
 		e.putStringSet("days", days); 
 		e.putInt("soundFile", soundFile);
 		e.putInt("alarmVolume", alarmVolume);
-		e.putBoolean("active", active);
+		e.putBoolean("alarmActive", active);
 		e.commit();
     }
     
@@ -335,37 +355,42 @@ public class AlarmClockActivity extends Activity {
     	Button b = (Button)view;
     	Button buttonON = (Button)findViewById(R.id.buttonON);
     	
-    	if(b.getCurrentTextColor() != Color.parseColor("#cccccc"))
-    	{
-    		b.setTextColor(Color.parseColor("#cccccc"));
-    		b.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
-    		buttonON.setTextColor(Color.parseColor("black"));
-    		buttonON.getBackground().clearColorFilter();
-    		CancelAlarm();
-    	}
+		b.setTextColor(Color.parseColor("#cccccc"));
+		b.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
+		buttonON.setTextColor(Color.parseColor("black"));
+		buttonON.getBackground().clearColorFilter();
+		cancelAlarm();
     }
     
-    public void CancelAlarm()
+    public void cancelAlarm()
     {
-    	
+    	Intent intent = new Intent(getBaseContext(), OneTimeAlarm.class);
+        PendingIntent sender = PendingIntent.getBroadcast(getBaseContext(),33, intent, 
+    	PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+        am.cancel(sender);
+        
+        //save selections to preferences
+    	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    	Editor e = prefs.edit();
+		e.putBoolean("active", false);
+		e.commit();
+		
     }
     
     public void onClickON(View view)
     {
-    	Button b = (Button)view;
+    	Button b = (Button)view; 
     	Button buttonOFF = (Button)findViewById(R.id.buttonOFF);
     	
-    	if(b.getCurrentTextColor() != Color.parseColor("#cccccc"))
-    	{
-    		b.setTextColor(Color.parseColor("#cccccc"));
-    		b.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
-    		buttonOFF.setTextColor(Color.parseColor("black"));
-    		buttonOFF.getBackground().clearColorFilter();
-    		SaveAlarm();
-    	}
+		b.setTextColor(Color.parseColor("#cccccc"));
+		b.getBackground().setColorFilter(Color.parseColor("#666666"), android.graphics.PorterDuff.Mode.MULTIPLY);
+		buttonOFF.setTextColor(Color.parseColor("black"));
+		buttonOFF.getBackground().clearColorFilter();
+		saveAlarm();
     }
     
-    private void SaveAlarm()
+    private void saveAlarm()
     {
     	//get selections from UI
     	TimePicker tp = (TimePicker)findViewById(R.id.timePickerAlarm);	
@@ -377,7 +402,7 @@ public class AlarmClockActivity extends Activity {
     	Spinner s = (Spinner)findViewById(R.id.spinnerSoundFile);
     	int soundFile = s.getSelectedItemPosition();
     	String soundFileString = s.getSelectedItem().toString();
-    	boolean alarmActive = false;
+    	boolean alarmActive = true;
     	
     	UpdateSuggestedSleepTimes(alarmHour, alarmMinute);
     	SavePreferences(alarmHour, alarmMinute, alarmVolume, soundFile, days, alarmActive);
@@ -427,14 +452,14 @@ public class AlarmClockActivity extends Activity {
     	
     	return s;
     }
-     
+      
     private boolean PreferencesExist()
     {
     	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		
     	//Editor e = prefs.edit();
-		//e.clear();
-    	//e.commit();
+		//e.clear();  
+    	//e.commit(); 
     	
     	if (prefs.contains("sleepwright"))
     	{

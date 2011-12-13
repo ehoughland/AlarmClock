@@ -65,7 +65,7 @@
     	
 			<TextView android:id="@+id/textViewBedTime1"
 				android:layout_height="wrap_content" android:layout_width="wrap_content"
-			    android:text="10:30" android:typeface="normal" android:textStyle="bold" 
+			    android:textStyle="bold" 
 			    android:textSize="20dp"
 			    android:textColor="#666666" android:background="#e6e6e6" />
 	
@@ -74,14 +74,14 @@
 			    android:layout_width="wrap_content" android:layout_height="wrap_content"
 			    android:layout_toRightOf="@+id/textViewBedTime1"
 			    android:layout_alignBaseline="@+id/textViewBedTime1"
-			    android:background="#e6e6e6" android:text="PM" android:paddingLeft="3dp"
-			    android:textColor="#666666" android:textSize="16dp" android:typeface="normal" />
+			    android:background="#e6e6e6" android:paddingLeft="3dp"
+			    android:textColor="#666666" android:textSize="16dp" />
 			
 			<TextView android:id="@+id/textViewBedTime2"
 				android:layout_height="wrap_content" android:layout_width="wrap_content"
 				android:paddingLeft="18dp"
 				android:layout_toRightOf="@+id/textViewBedTime1AMPM"
-			    android:text="12:00" android:typeface="normal" android:textStyle="bold" 
+			    android:textStyle="bold" 
 			    android:textSize="20dp"
 			    android:textColor="#666666" android:background="#e6e6e6" />
 	
@@ -89,15 +89,15 @@
 			    android:id="@+id/textViewBedTime2AMPM"
 			    android:layout_width="wrap_content" android:layout_height="wrap_content"
 			    android:layout_toRightOf="@+id/textViewBedTime2"
-			    android:background="#e6e6e6" android:text="AM" android:paddingLeft="3dp"
+			    android:background="#e6e6e6" android:paddingLeft="3dp"
 			    android:layout_alignBaseline="@+id/textViewBedTime2"
-			    android:textColor="#666666" android:textSize="16dp" android:typeface="normal" />
+			    android:textColor="#666666" android:textSize="16dp" />
 			
 			<TextView android:id="@+id/textViewBedTime3"
 				android:layout_height="wrap_content" android:layout_width="wrap_content"
 				android:layout_toRightOf="@+id/textViewBedTime2AMPM"
 			    android:paddingLeft="18dp"
-			    android:text="1:30" android:typeface="normal" android:textStyle="bold" 
+			    android:textStyle="bold" 
 			    android:textSize="20dp"
 			    android:textColor="#666666" android:background="#e6e6e6" />
 	
@@ -106,8 +106,8 @@
 			    android:layout_width="wrap_content" android:layout_height="wrap_content"
 			    android:layout_toRightOf="@+id/textViewBedTime3"
 			    android:layout_alignBaseline="@+id/textViewBedTime3"
-			    android:background="#e6e6e6" android:text="AM" android:paddingLeft="3dp"
-			    android:textColor="#666666" android:textSize="16dp" android:typeface="normal" />
+			    android:background="#e6e6e6" android:paddingLeft="3dp"
+			    android:textColor="#666666" android:textSize="16dp" />
 			
 		</RelativeLayout>
 
