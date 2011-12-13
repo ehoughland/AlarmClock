@@ -249,7 +249,7 @@ public class AlarmClockActivity extends Activity {
         	alarmDay.add(Calendar.DAY_OF_MONTH, 1);
         }
       
-        // difference in times
+        // difference in times 
         int diff = (int) (alarmDay.getTimeInMillis() - today.getTimeInMillis());
         minutesToAlarm = diff/60000;
         
@@ -373,9 +373,8 @@ public class AlarmClockActivity extends Activity {
         //save selections to preferences
     	SharedPreferences prefs = getPreferences(MODE_PRIVATE);
     	Editor e = prefs.edit();
-		e.putBoolean("active", false);
+		e.putBoolean("alarmActive", false);
 		e.commit();
-		
     }
     
     public void onClickON(View view)
